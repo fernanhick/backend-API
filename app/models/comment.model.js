@@ -12,6 +12,10 @@ module.exports = (mongoose) => {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Project",
                 },
+                user: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User",
+                },
             },
             { timestamps: true }
         )
