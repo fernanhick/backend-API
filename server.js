@@ -24,9 +24,9 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to Projects V1 API" });
 });
 
-//IMPORT routes for each model
-
-// Server to listen in specific port
+//IMPORT routes for each model so this can be executed
+require("./app/routes/project.routes")(app);
+require("./app/routes/comment.routes")(app);
 app.listen(PORT, () => {
     console.log(`Server listening to port: ${PORT}`);
 });
