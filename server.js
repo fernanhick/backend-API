@@ -28,13 +28,16 @@ app.get("/", (req, res) => {
 //IMPORT routes for each model so this can be executed
 require("./app/routes/project.routes")(app);
 require("./app/routes/comment.routes")(app);
+require("./app/routes/auth.routes")(app);
+require("./app/routes/user.routes")(app);
+
 app.listen(PORT, () => {
     console.log(`Server listening to port: ${PORT}`);
 });
 
 //Setup the connection to monngoose database
 db.mongoose
-    .connect(db.url, { useNewUrlParser: true }) //connect to db.url
+    .connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true }) //connect to db.url
     .then(() => {
         console.log(`Connected to database ${db.url}`); //display message for connection
     })
@@ -74,3 +77,5 @@ function initial() {
         }
     });
 }
+
+initial();

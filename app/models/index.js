@@ -11,8 +11,8 @@ db.url = dbConfig.url;
 //import models for each collection
 db.projects = require("./project.model")(mongoose);
 db.comments = require("./comment.model")(mongoose);
-db.user = require("./user.model")(mongoose);
-db.role = require("./role.model")(mongoose);
+db.users = require("./user.model")(mongoose);
+db.roles = require("./role.model");
 db.ROLES = ["user", "admin", "moderator"];
 //exports the db object from the module
 module.exports = db;
