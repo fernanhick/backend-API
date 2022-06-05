@@ -10,6 +10,16 @@ module.exports = (app) => {
     router.post("/", projects.create);
     //Get records for all projects
     router.get("/", projects.getAll);
+
+    // Get Record Based on ID
+    router.get("/:id", projects.getById);
+
+    // Delete Record based on ID
+    router.delete("/:id", projects.deleteById);
+    // Delete all record
+    router.delete("/", projects.deleteAll);
+    // PATCH record => UPDATE
+    router.patch("/:id", projects.updateProject);
     //Assign the predifined endpoints for all the CRUD requests
     app.use("/api/v1/projects", router);
 };

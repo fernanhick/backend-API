@@ -32,3 +32,50 @@ exports.getAll = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+exports.getById = async (req, res) => {
+    const id = req.params.id;
+    if (!id) {
+        res.status(400).json({ error: "No Id detected" });
+    }
+
+    try {
+        const data = await Project.findById(id);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+exports.deleteById = async (req, res) => {
+    //get id from parameters
+    const id = req.params.id;
+
+    try {
+        const data = await Project.findById(id);
+        if (!data) {
+            res.status(400).json({ error: "Record not found" });
+        } else {
+            await Project.findByIdAndRemove(id);
+            res.status(200).json({ message: ` record ${id} deleted` });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+exports.deleteAll = async (req, res) => {
+    try {
+        await Project.deleteMany();
+        res.status(200).json({ message: "All records deleted" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+exports.updateProject = async (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+    try {
+        await Project.findByIdAndUpdate(id, body);
+        res.status(200).json({ message: `Record ${id} updated`, data: body });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

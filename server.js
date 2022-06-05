@@ -12,6 +12,7 @@ const corsOptions = {
 
 //import database config from the models index.js
 const db = require("./app/models");
+const Role = require("./app/models/role.model");
 
 //set the cors url from where call can be made
 app.use(cors(corsOptions));
@@ -42,3 +43,34 @@ db.mongoose
         console.log({ "Cannot connect to database": err.message });
         process.exit(); //exit process in case of an error
     });
+
+function initial() {
+    Role.estimatedDocumentCount((error, count) => {
+        if (!error && count === 0) {
+            new Role({
+                name: "user",
+            }).save((error) => {
+                if (error) {
+                    console.log("error", error);
+                }
+                console.log("Added 'user' to roles collection");
+            });
+            new Role({
+                name: "moderator",
+            }).save((error) => {
+                if (error) {
+                    console.log("error", error);
+                }
+                console.log("Added 'moderator' to roles collection");
+            });
+            new Role({
+                name: "admin",
+            }).save((error) => {
+                if (error) {
+                    console.log("error", error);
+                }
+                console.log("Added 'admin' to roles collection");
+            });
+        }
+    });
+}
