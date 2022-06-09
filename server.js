@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT;
 const app = express();
 const corsOptions = {
-    origin: "http://localhost:8080",
+    origin: "http://localhost:8081",
 };
 
 //import database config from the models index.js

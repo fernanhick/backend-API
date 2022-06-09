@@ -1,3 +1,5 @@
+const { verifyToken } = require("../middleware/authJwt");
+
 //Export module with the routes
 module.exports = (app) => {
     //Import function that will be execute as callback for the routes
@@ -7,7 +9,7 @@ module.exports = (app) => {
 
     //Route for creating a POST request to create a new project
     //Call post method from router, pass parameter for the endpoint followed by the function created in the controller
-    router.post("/", projects.create);
+    router.post("/", verifyToken, projects.create);
     //Get records for all projects
     router.get("/", projects.getAll);
 
