@@ -3,8 +3,9 @@ const db = require('../models')
 // Initiate instance of the project models
 const Project = db.projects
 const User = db.users
+
 // Create the logic for CRUD functionalities
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
     // const user = await User.findById(req.body.user)
     const user = req.body.user
     // Store data into a new Project object
@@ -16,9 +17,10 @@ exports.create = async (req, res) => {
         user: user,
     })
     // Save data with mongoose method save()
-    await data.save()
     const relU = await User.findById(user)
+
     try {
+        await data.save()
         // Response with a 200 status and json object display
         relU.projects.push(data)
         await relU.save()
@@ -26,7 +28,7 @@ exports.create = async (req, res) => {
         res.status(200).json({ record: data })
     } catch (error) {
         // Catch error and send Response with a status 400 and display error message
-        res.status(400).json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }
 // Get records for all Projects
@@ -48,7 +50,17 @@ exports.getById = async (req, res) => {
     }
 
     try {
+        // Nested population using objects, apply select 0 to the fields we dont wanto do display
         const data = await Project.findById(id)
+            .populate({
+                path: 'comments',
+                populate: {
+                    path: 'user',
+                    model: 'User',
+                    select: { password: 0 },
+                },
+            })
+            .populate('user', 'username projects')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).json({ error: error.message })

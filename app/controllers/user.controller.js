@@ -40,3 +40,13 @@ exports.getUser = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
+exports.updateUser = async (req, res) => {
+    const id = req.params.id
+    const body = req.body
+    try {
+        await User.findByIdAndUpdate(id, body)
+        res.status(200).json({ message: 'User updated' })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}

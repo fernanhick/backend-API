@@ -25,4 +25,5 @@ module.exports = function (app) {
     app.delete('/api/v1/users', controller.deleteAll)
     app.get('/api/v1/users', controller.getAll)
     app.get('/api/v1/user/:id', controller.getUser)
+    app.patch('/api/v1/user/:id', controller.updateUser)
 }
