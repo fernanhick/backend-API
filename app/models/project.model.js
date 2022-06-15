@@ -30,6 +30,9 @@ module.exports = (mongoose) => {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'User',
                 },
+                likes: {
+                    type: Array,
+                },
             },
             { timestamps: true }
         )

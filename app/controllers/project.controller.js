@@ -100,3 +100,32 @@ exports.updateProject = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
+
+exports.likeProject = async (req, res) => {
+    const id = req.params.id
+    const username = req.body.username
+    const relProject = await Project.findById(id)
+    relProject.likes.push(username)
+    try {
+        relProject.save()
+        res.status(200).json({ message: 'Project liked' })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+exports.unLikeProject = async (req, res) => {
+    const id = req.params.id
+    const username = req.body.username
+    const relProject = await Project.findById(id)
+    var myIndex = relProject.likes.indexOf(username)
+    if (myIndex !== -1) {
+        relProject.likes.splice(myIndex, 1)
+    }
+
+    try {
+        relProject.save()
+        res.status(200).json({ message: 'Project liked' })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
