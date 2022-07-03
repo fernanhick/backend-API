@@ -54,6 +54,20 @@ module.exports = (mongoose) => {
                 technologies: {
                     type: String,
                 },
+                friends: [
+                    {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'User',
+                        date: 'created_at',
+                    },
+                ],
+                friendRequest: [
+                    {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'FriendRequest',
+                        date: 'created_at',
+                    },
+                ],
             },
             { timestamps: true }
         )

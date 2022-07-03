@@ -12,6 +12,7 @@ db.url = dbConfig.url
 db.projects = require('./project.model')(mongoose)
 db.comments = require('./comment.model')(mongoose)
 db.users = require('./user.model')(mongoose)
+db.friendRequest = require('./friends.model')(mongoose)
 db.roles = require('./role.model')
 db.ROLES = ['user', 'admin', 'moderator']
 // exports the db object from the module

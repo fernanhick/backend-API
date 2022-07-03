@@ -1,5 +1,4 @@
 const db = require('../models')
-const { findById } = require('../models/role.model')
 const User = db.users
 
 exports.allAccess = (req, res) => {
