@@ -65,7 +65,6 @@ module.exports = (mongoose) => {
                     {
                         type: mongoose.Schema.Types.ObjectId,
                         ref: 'FriendRequest',
-                        date: 'created_at',
                     },
                 ],
             },
