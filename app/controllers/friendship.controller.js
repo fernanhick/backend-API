@@ -73,3 +73,6 @@ exports.getAll = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
+
+//TODO Remove friendship by passing current user and the user they want to remove
+exports.removeFriendship = async (req, res) => {}
